@@ -133,7 +133,7 @@ function tabs(){
 function card(e,blk,i){
  var n=nSets(e.sets),id=blk+"-"+i+"-"+e.vid,c="",done=0,arr=state[id]||[];
  for(var k=0;k<n;k++){var on=!!arr[k];if(on)done++;c+='<label><input type="checkbox" data-id="'+id+'" data-k="'+k+'" data-n="'+n+'"'+(on?" checked":"")+' aria-label="'+esc(e.name)+' set '+(k+1)+'"><span>'+(n>1?k+1:"✓")+"</span></label>"}
- return '<div class="card'+(done===n?" done":"")+'" data-card="'+id+'"><img class="thumb" alt="Demo: '+esc(e.vt)+'" src="'+e.img+'"><div><h4>'+esc(e.name)+'</h4><div class="sets">'+esc(e.sets)+'</div><div class="cue">'+esc(e.cue)+'</div><div class="actions"><a class="watch" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+e.vid+'">▶ Watch demo</a><button class="btn sm" data-rest="'+restFor(e)+'">Rest '+restFor(e)+'s</button></div><div class="chk">'+c+'</div><div class="src">'+esc(e.vt)+" · "+esc(e.ch)+"</div></div></div>";
+ return '<div class="card'+(done===n?" done":"")+'" data-card="'+id+'"><img class="thumb" alt="Demo: '+esc(e.vt)+'" src="'+e.img+'"><div><h4>'+esc(e.name)+'</h4><div class="sets">'+esc(e.sets)+'</div><div class="cue">'+esc(e.cue)+'</div><div class="actions"><a class="watch" target="_blank" rel="noopener" href="'+(e.url||("https://www.youtube.com/watch?v="+e.vid))+'">▶ Watch demo</a><button class="btn sm" data-rest="'+restFor(e)+'">Rest '+restFor(e)+'s</button></div><div class="chk">'+c+'</div><div class="src">'+esc(e.vt)+" · "+esc(e.ch)+"</div></div></div>";
 }
 function ruleBox(){
  var hist=load("jtw:checkins",[]),today=hist.filter(function(x){return x.d===TODAY.key})[0];
