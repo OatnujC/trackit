@@ -42,6 +42,11 @@ groups = {
  ex("Tibialis raises against wall","2 × 15","Back on the wall, heels forward, lift the toes high.","VzIcGAgBiaM","Tibialis Wall Raises","The Barefoot Sprinter"),
  ex("Single-leg balance","3 × 30s / leg","Soft knee, steady foot; progress to a cushion.","7SF7AYh2_Yw","Single Leg Balance Exercise","Coury & Buehler PT"),
 ],
+"recovery":[
+ ex("Easy swim","20–30 min","Conversational pace, smooth breathing. Finish 2–4 hours before bed. No pool? Do the easy bike instead.","REC_swim","Recovery cardio","Coach note",url="NONE"),
+ ex("Easy bike (alternative)","20–30 min","Light resistance, steady cadence, you can still talk. Save hard intervals for earlier in the day.","REC_bike","Recovery cardio","Coach note",url="NONE"),
+ ex("Sauna, then cool shower","10–15 min + 2 min","Sit in the sauna, then a cool shower. Drink 500 ml or more of water after: you sweat heavily.","REC_sauna","Recovery & sleep","Coach note",url="NONE"),
+],
 "home":[
  ex("Wall lunge check","3 × 8 / leg","Front knee stops short of the wall, chest tall.","oT1VDVUjGxY","The 6 Keys for a Perfect Lunge in Badminton","Tobias Wadenka"),
  ex("Split-step multi-direction lunges","3 × 6 / direction","Split step, lunge forward, diagonal or side with chest up and knee over toes, then explode back to base in one push.","IG_Dej4VY","Why this exercise is so good for badminton","madsdrostchristophersen · Instagram",url="https://www.instagram.com/p/Dej4VY-ilJI/"),

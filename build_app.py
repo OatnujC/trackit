@@ -95,16 +95,16 @@ var DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var VIEWS={
  Mon:{title:"Gym + rehab finisher",desc:"About 65–75 min. Plyos first while fresh, then strength, core, conditioning, then the calf finisher.",blocks:[["Gym 1: Warm-up","warmup"],["Gym 2: Plyometrics (do these fresh)","plyo"],["Gym 3: Strength","strength"],["Gym 4: Core","core"],["Gym 5: Conditioning","cond"],["Rehab finisher","fin"]]},
  Tue:{title:"Home routine + court",desc:"15–20 min home routine, then take the cues onto court.",blocks:[["Home routine","home"]],note:"<b>On court:</b> split step on every opponent hit, racket up after every shot, scissor-land-go on smashes, chest proud in the net lunge and push back with 2 quick steps."},
- Wed:{title:"Calf & Achilles rehab",desc:"About 20 min. Slow and controlled. Check the Achilles rule below.",blocks:[["Calf & Achilles rehab","rehab"]],rule:true},
+ Wed:{title:"Calf rehab + recovery swim",desc:"About 20 min rehab, then an easy 20–30 min swim or bike and a sauna. Aim to finish 2–4 hours before bed for better sleep.",blocks:[["Calf & Achilles rehab","rehab"],["Recovery: swim, bike, sauna","recovery"]],rule:true},
  Thu:{title:"Gym + rehab finisher",desc:"Same as Monday. Try to add a little load or a rep vs Monday.",blocks:[["Gym 1: Warm-up","warmup"],["Gym 2: Plyometrics (do these fresh)","plyo"],["Gym 3: Strength","strength"],["Gym 4: Core","core"],["Gym 5: Conditioning","cond"],["Rehab finisher","fin"]]},
  Fri:{title:"Home + isometric holds",desc:"Light day before matches: home routine plus isometric calf holds. No heavy legs.",blocks:[["Home routine","home"],["Isometric holds","iso"]]},
  Sat:{title:"Match day",desc:"Quick warm-up, then play. Keep the cues simple.",blocks:[["Quick warm-up","sat"]],match:true},
- Sun:{title:"Rest",desc:"Full rest. Easy walk or stretch if you like. Do your morning-after Achilles check.",blocks:[],rule:true}
+ Sun:{title:"Recovery day",desc:"Day after matches: easy swim or bike and a sauna, nothing hard. Finish 2–4 hours before bed. Do your morning-after Achilles check.",blocks:[["Recovery: swim, bike, sauna","recovery"]],rule:true}
 };
 G.fin=[G.rehab[1],G.rehab[3],G.rehab[4]];
 G.iso=[G.rehab[0]];
 G.sat=[G.warmup[0],G.warmup[1],G.warmup[2],G.plyo[0],G.plyo[4]];
-var SECTIONS=[["warmup","Gym 1: Warm-up"],["plyo","Gym 2: Plyometrics"],["strength","Gym 3: Strength"],["core","Gym 4: Core"],["cond","Gym 5: Conditioning"],["rehab","Calf & Achilles rehab"],["home","Home routine"]];
+var SECTIONS=[["warmup","Gym 1: Warm-up"],["plyo","Gym 2: Plyometrics"],["strength","Gym 3: Strength"],["core","Gym 4: Core"],["cond","Gym 5: Conditioning"],["rehab","Calf & Achilles rehab"],["recovery","Recovery: swim, bike, sauna"],["home","Home routine"]];
 var CUES=[["Chest proud in the lunge","Hinge from the hip crease with a flat back, never fold at the waist. Knee over ankle, not past the toes."],["Scissor, land, go","Switch legs in the air on every smash, land on the left foot and move forward to the net."],["Racket up after every shot","Racket head back in front of your chest before your opponent hits."],["Morning-after Achilles check","Stiff or sore the morning after jumping means two-footed jumps only for a session or two."]];
 var MATCH=[["Split step every hit","Small hop as the opponent hits, land on the balls of the feet."],["Racket up","Racket head above your hand between shots, never below the waist."],["Scissor, land, go","After the smash land on the left foot and follow in to the net."],["Don't lift and hang at the net","If you lift, get back to base and defend side-by-side."],["Pace yourself","Against weaker players, play patient, set up the kill; use drives and net shots instead of lifting."]];
 
@@ -133,7 +133,7 @@ function tabs(){
 function card(e,blk,i){
  var n=nSets(e.sets),id=blk+"-"+i+"-"+e.vid,c="",done=0,arr=state[id]||[];
  for(var k=0;k<n;k++){var on=!!arr[k];if(on)done++;c+='<label><input type="checkbox" data-id="'+id+'" data-k="'+k+'" data-n="'+n+'"'+(on?" checked":"")+' aria-label="'+esc(e.name)+' set '+(k+1)+'"><span>'+(n>1?k+1:"✓")+"</span></label>"}
- return '<div class="card'+(done===n?" done":"")+'" data-card="'+id+'"><img class="thumb" alt="Demo: '+esc(e.vt)+'" src="'+e.img+'"><div><h4>'+esc(e.name)+'</h4><div class="sets">'+esc(e.sets)+'</div><div class="cue">'+esc(e.cue)+'</div><div class="actions"><a class="watch" target="_blank" rel="noopener" href="'+(e.url||("https://www.youtube.com/watch?v="+e.vid))+'">▶ Watch demo</a><button class="btn sm" data-rest="'+restFor(e)+'">Rest '+restFor(e)+'s</button></div><div class="chk">'+c+'</div><div class="src">'+esc(e.vt)+" · "+esc(e.ch)+"</div></div></div>";
+ return '<div class="card'+(done===n?" done":"")+'" data-card="'+id+'"><img class="thumb" alt="Demo: '+esc(e.vt)+'" src="'+e.img+'"><div><h4>'+esc(e.name)+'</h4><div class="sets">'+esc(e.sets)+'</div><div class="cue">'+esc(e.cue)+'</div><div class="actions">'+(e.url==="NONE"?"":'<a class="watch" target="_blank" rel="noopener" href="'+(e.url||("https://www.youtube.com/watch?v="+e.vid))+'">▶ Watch demo</a>')+'<button class="btn sm" data-rest="'+restFor(e)+'">Rest '+restFor(e)+'s</button></div><div class="chk">'+c+'</div><div class="src">'+esc(e.vt)+" · "+esc(e.ch)+"</div></div></div>";
 }
 function ruleBox(){
  var hist=load("jtw:checkins",[]),today=hist.filter(function(x){return x.d===TODAY.key})[0];
