@@ -105,8 +105,18 @@ G.fin=[G.rehab[1],G.rehab[3],G.rehab[4]];
 G.iso=[G.rehab[0]];
 G.sat=[G.warmup[0],G.warmup[1],G.warmup[2],G.plyo[0],G.plyo[4]];
 var SECTIONS=[["warmup","Gym 1: Warm-up"],["plyo","Gym 2: Plyometrics"],["strength","Gym 3: Strength"],["core","Gym 4: Core"],["cond","Gym 5: Conditioning"],["rehab","Calf & Achilles rehab"],["recovery","Recovery: swim, bike, sauna"],["home","Home routine"]];
-var CUES=[["Chest proud in the lunge","Hinge from the hip crease with a flat back, never fold at the waist. Knee over ankle, not past the toes."],["Scissor, land, go","Switch legs in the air on every smash, land on the left foot and move forward to the net."],["Racket up after every shot","Racket head back in front of your chest before your opponent hits."],["Morning-after Achilles check","Stiff or sore the morning after jumping means two-footed jumps only for a session or two."]];
+var CUES=[["Chest proud in the lunge","Hinge from the hip crease with a flat back, never fold at the waist. Knee over ankle, not past the toes. Cue: bum back, chest up."],["Scissor, land, go","Switch legs in the air on every smash, land on the left foot and move forward to the net."],["Racket up after every shot","Racket head back in front of your chest before your opponent hits."],["Belt buckle to the net","Hips turn first on clears and smashes; the arm follows. Late flat contact is what lands mid court."],["Split step, then turn","Small hop as they hit, then turn sideways before you travel — never run backwards to the rear court."],["Morning-after Achilles check","Stiff or sore the morning after jumping means two-footed jumps only for a session or two."]];
 var MATCH=[["Split step every hit","Small hop as the opponent hits, land on the balls of the feet."],["Racket up","Racket head above your hand between shots, never below the waist."],["Scissor, land, go","After the smash land on the left foot and follow in to the net."],["Don't lift and hang at the net","If you lift, get back to base and defend side-by-side."],["Pace yourself","Against weaker players, play patient, set up the kill; use drives and net shots instead of lifting."]];
+var DRILLS=[
+ {id:"drill_net",title:"Net kills",cue:"Racket up, tap not swing",note:"Short finger-snap. Elbow in front. Stop the racket dead after contact."},
+ {id:"drill_receive",title:"Serve receive",cue:"Racket up in front at head height, left foot forward, loose grip",note:"Weight on the front foot. On a flick, turn sideways and keep the racket above your head."},
+ {id:"drill_early",title:"Taking the shuttle early",cue:"Split step as they hit, step to meet it",note:"Watch their racket, not the shuttle. Meet it in front of you at the highest point."},
+ {id:"drill_rear",title:"Front to rear court (both corners)",cue:"Recover to base, turn first, hit above and slightly in front",note:"Forehand: turn, chassé, scissor. Round-the-head: Malaysian L-R-L for fast flats; cross step + scissor for high clears. Achilles: build one-leg jumps gradually."},
+ {id:"drill_depth",title:"Clear depth / stop mid-court hits",cue:"Belt buckle to the net, hit up and through",note:"Late contact is what sends clears mid court. Get behind the shuttle first."},
+ {id:"drill_lunge",title:"Lunges and landings",cue:"Bum back, chest up — hinge, don't fold",note:"Knee over toes. Push back through the front heel. Scissor-land-go, not two-footed stick."},
+ {id:"drill_hips",title:"Hips and power",cue:"Hips first, arm follows",note:"If your shoulder is tired before your legs, the arm is still doing the work."},
+ {id:"drill_fit",title:"Fitness / getting gassed",cue:"Easy base plus badminton intervals",note:"One easy base session and one hard interval session per week. Rest 30–60s and drink between drill sets."}
+];
 
 function londonDate(){
  try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"}).formatToParts(new Date());var o={};p.forEach(function(x){o[x.type]=x.value});return {key:o.year+"-"+o.month+"-"+o.day,wd:o.weekday.slice(0,3)};}
@@ -126,6 +136,7 @@ function restFor(e){return /plyo|Pogo|jump|hop|bound/i.test(e.name)?90:60}
 function tabs(){
  var h="";DAYS.slice(1).concat(["Sun"]).forEach(function(d){h+='<button class="tab'+(current.v===d?" on":"")+'" data-v="'+d+'">'+d+(d===TODAY.wd?'<span class="today">TODAY</span>':"")+"</button>"});
  h+='<button class="tab'+(current.v==="all"?" on":"")+'" data-v="all">All</button>';
+ h+='<button class="tab'+(current.v==="drills"?" on":"")+'" data-v="drills">Drills</button>';
  h+='<button class="tab'+(current.v==="cues"?" on":"")+'" data-v="cues">Cues</button>';
  h+='<button class="tab'+(current.v==="week"?" on":"")+'" data-v="week">Week</button>';
  document.getElementById("tabs").innerHTML=h;
@@ -165,6 +176,20 @@ function render(){
   h+='<section class="hero"><h2>All sections</h2><p>Every exercise in the plan. Ticks here are saved for today too.</p></section>';
   SECTIONS.forEach(function(s){h+='<h3 class="sec">'+esc(s[1])+"</h3>";G[s[0]].forEach(function(e,i){h+=card(e,s[0],i)})});
   h+=ruleBox()+cuesHtml();
+ }else if(v==="drills"){
+  var dp=progress(DRILLS.map(function(d){return [d.title,d.id]}));
+  var dpc=dp[1]?Math.round(dp[0]/dp[1]*100):0;
+  h+='<section class="hero"><h2>Drills by focus</h2><p>Pick one weakness and work it. Partner drills have both of you working. Start half pace, then add speed.</p>';
+  if(dp[1])h+='<div class="bar"><i id="pbar" style="width:'+dpc+'%"></i></div><div class="prow"><span id="ptxt">'+dp[0]+" / "+dp[1]+' sets · '+dpc+'%</span><button class="btn sm" id="resetday">Reset today</button></div>';
+  h+="</section>";
+  h+='<div class="note"><b>How to use:</b> 1–2 focus areas per session while fresh. Film a match every few weeks and drop a drill once the fix shows up in games.</div>';
+  h+=ruleBox();
+  DRILLS.forEach(function(d){
+   h+='<h3 class="sec">'+esc(d.title)+"</h3>";
+   h+='<div class="cue-row"><b>Cue: '+esc(d.cue)+"</b>"+esc(d.note)+"</div>";
+   if(d.id==="drill_rear"||d.id==="drill_lunge")h+='<div class="note"><b>Achilles:</b> Malaysian step and scissor jumps load the calf. Stiff the morning after? Two-footed only for a session or two. Your Wed rehab still applies.</div>';
+   G[d.id].forEach(function(e,i){h+=card(e,d.id,i)});
+  });
  }else if(v==="cues"){h+=cuesHtml()+ruleBox()}
  else if(v==="week"){
   h+='<section class="hero"><h2>Weekly schedule</h2><p>No heavy legs or calf work the day before you play.</p></section><div class="note"><table class="wk">';
@@ -174,7 +199,10 @@ function render(){
  m.innerHTML=h;
 }
 function updProgress(){
- var V=VIEWS[current.v];if(!V)return;var p=progress(V.blocks),pc=p[1]?Math.round(p[0]/p[1]*100):0;
+ var blocks=null;
+ if(VIEWS[current.v])blocks=VIEWS[current.v].blocks;
+ else if(current.v==="drills")blocks=DRILLS.map(function(d){return [d.title,d.id]});
+ if(!blocks)return;var p=progress(blocks),pc=p[1]?Math.round(p[0]/p[1]*100):0;
  var b=document.getElementById("pbar"),t=document.getElementById("ptxt");if(b)b.style.width=pc+"%";if(t)t.textContent=p[0]+" / "+p[1]+" sets · "+pc+"%"+(pc===100?" 🎉":"");
 }
 document.addEventListener("click",function(ev){
