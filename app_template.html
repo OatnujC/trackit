@@ -171,7 +171,8 @@ function tabs(){
  var h="";DAYS.slice(1).concat(["Sun"]).forEach(function(d){h+='<button class="tab'+(current.v===d?" on":"")+'" data-v="'+d+'">'+d+(d===TODAY.wd?'<span class="today">TODAY</span>':"")+"</button>"});
  h+='<button class="tab'+(current.v==="all"?" on":"")+'" data-v="all">All</button>';
  h+='<button class="tab'+(current.v==="drills"?" on":"")+'" data-v="drills">Drills</button>';
-  h+='<button class="tab'+(current.v==="cues"?" on":"")+'" data-v="cues">Cues</button>';
+ h+='<button class="tab'+(current.v==="shots"?" on":"")+'" data-v="shots">Shots</button>';
+ h+='<button class="tab'+(current.v==="cues"?" on":"")+'" data-v="cues">Cues</button>';
  h+='<button class="tab'+(current.v==="week"?" on":"")+'" data-v="week">Week</button>';
  document.getElementById("tabs").innerHTML=h;
 }
@@ -257,7 +258,7 @@ function drillsHtml(){
  return h;
 }
 
-var SHOTS = [];
+var SHOTS = __SHOTS__;
 var SHOT_GROUPS=["Serve","Receive","Net","Mid-court","Defence / reset","Defence","Overhead","Attack"];
 function shotCard(s, open){
  var h='<div class="shot-card'+(open?" open":"")+'" data-shot="'+s.id+'">';
@@ -321,6 +322,8 @@ function render(){
   h+=ruleBox()+cuesHtml();
  }else if(v==="drills"){
   h+=drillsHtml();
+ }else if(v==="shots"){
+  h+=shotsHtml();
  }else if(v==="cues"){h+=cuesHtml()+ruleBox()}
  else if(v==="week"){
   h+='<section class="hero"><h2>Weekly schedule</h2><p>No heavy legs or calf work the day before you play.</p></section><div class="note"><table class="wk">';

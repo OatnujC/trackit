@@ -1,0 +1,450 @@
+[
+{
+"id": "short_serve",
+"name": "Short serve",
+"group": "Serve",
+"doubles": "Start most doubles rallies. Keep it tight to the tape so they can't kill; set up your partner at the net.",
+"steps": [
+"Backhand grip, racket head above the hand, shuttle held out in front.",
+"Same set-up every time so flick and short look identical.",
+"Brush up the feathers with a short finger push — don't swing the arm.",
+"Land just over the tape, ideally on the T or wide short.",
+"Recover: racket up, ready to take the net or cover the flick miss."
+],
+"cues": [
+"Same set-up as the flick",
+"Soft fingers, no arm swing",
+"Racket stays up after contact"
+],
+"mistakes": [
+"Telegraphing with a different preparation",
+"Serving too high above the tape",
+"Dropping the racket after contact"
+],
+"vid": "G0hZ7JzSoX0",
+"vt": "Drive Serve / serve deception (same set-up)",
+"ch": "Badminton Insight",
+"drill": "drill_receive"
+},
+{
+"id": "flick_serve",
+"name": "Flick serve",
+"group": "Serve",
+"doubles": "Punish receivers who crowd the net or sit on the short serve. Use sparingly so it stays a surprise.",
+"steps": [
+"Identical preparation to the short serve.",
+"At the last moment, tighten the fingers and punch the shuttle flat-ish toward the rear tramlines.",
+"Aim deep to the backhand corner when you can.",
+"Follow in — be ready for a weak return."
+],
+"cues": [
+"Identical set-up to short",
+"Late finger punch, not a big swing",
+"Deep to the tramlines"
+],
+"mistakes": [
+"Different stance/racket position that tips the flick",
+"Flicking too high (easy smash)",
+"Never mixing it in, so they sit deep"
+],
+"vid": "G0hZ7JzSoX0",
+"vt": "Drive Serve - The Popular New Serve in Badminton",
+"ch": "Badminton Insight",
+"drill": "drill_receive"
+},
+{
+"id": "serve_receive",
+"name": "Serve receive / push",
+"group": "Receive",
+"doubles": "Your first attack. Push tight short serves into the body or mid-court; don't gift a lift.",
+"steps": [
+"Racket up at head height, left foot forward, loose grip (RH).",
+"Weight on the front foot, ready to push or turn on a flick.",
+"Meet short serves high — soft push to the body or mid-court gap.",
+"On a flick: push off the front foot, turn sideways, racket stays above the head."
+],
+"cues": [
+"Racket at head height",
+"Left foot forward, loose grip",
+"Push short; turn and clear/drive flicks"
+],
+"mistakes": [
+"Racket down by the waist",
+"Sitting too deep so short serves die",
+"Chasing flicks with the racket still low"
+],
+"vid": "eXIRaSN7Vvg",
+"vt": "How To Return The Serve In Badminton + 2 effective doubles returns!",
+"ch": "Badminton Insight",
+"drill": "drill_receive"
+},
+{
+"id": "net_shot",
+"name": "Net shot (tight net)",
+"group": "Net",
+"doubles": "Force the lift. Meet it high near the tape so they can't kill; set up your partner's smash.",
+"steps": [
+"Split step, then heel-to-toe lunge with chest up.",
+"Meet the shuttle high near the tape — don't let it drop.",
+"Loose grip, finger push: catch and place. No follow-through.",
+"Racket face slightly open; soft over the tape.",
+"Push back through the front heel to base, racket up."
+],
+"cues": [
+"Meet it high near the tape",
+"Loose grip finger push — catch and place",
+"Heel-to-toe lunge, chest up, no follow-through"
+],
+"mistakes": [
+"Swinging through and popping it up",
+"Folding at the waist in the lunge",
+"Late contact below the tape"
+],
+"vid": "doV0m6MNTCo",
+"vt": "How To Hit A Perfect Doubles Net Shot EVERY TIME",
+"ch": "Badminton Insight",
+"drill": "drill_lunge"
+},
+{
+"id": "net_spin",
+"name": "Net spin / tumble",
+"group": "Net",
+"doubles": "Make the tight net even harder to lift cleanly. Use when you arrive early.",
+"steps": [
+"Same early arrival and high contact as a dead net.",
+"Brush across the feathers (in-to-out or out-to-in) with fingers.",
+"Keep the swing short — spin comes from the brush, not power.",
+"Recover immediately; expect a lift or a weak net."
+],
+"cues": [
+"Arrive early or don't spin",
+"Short brush, not a swipe",
+"Same recovery as a dead net"
+],
+"mistakes": [
+"Spinning when late (pops up)",
+"Big arm swipe that hits the net",
+"Watching the spin instead of recovering"
+],
+"vid": "osFWRFKk88E",
+"vt": "The 3 Different Singles Net Shots You Need To Know",
+"ch": "Badminton Insight",
+"drill": "drill_net"
+},
+{
+"id": "net_kill",
+"name": "Net kill",
+"group": "Net",
+"doubles": "Put away anything above the tape. Your go-to finish at the net.",
+"steps": [
+"Racket up early as soon as you see a high net return.",
+"Lunge in with space between body and shuttle.",
+"Tap not swing — finger snap, stop the racket dead after contact.",
+"Aim steep down, straight or cross.",
+"Recover or stay ready for a block rebound."
+],
+"cues": [
+"Tap not swing",
+"Stop the racket dead",
+"Racket up early"
+],
+"mistakes": [
+"Swiping / long follow-through into the net",
+"Standing too close and getting jammed",
+"Waiting until the shuttle drops below the tape"
+],
+"vid": "BIZ6PJ8z5Uo",
+"vt": "The 2 Types Of NET KILL To Always Win The Point",
+"ch": "Badminton Insight",
+"drill": "drill_net"
+},
+{
+"id": "lift",
+"name": "Lift (forehand & backhand)",
+"group": "Defence / reset",
+"doubles": "Reset when you're under pressure. High for time; flatter when you want to rush their rear court.",
+"steps": [
+"Get the racket under the shuttle early with a relaxed grip.",
+"Use legs and a compact forearm brush — don't muscle with the shoulder.",
+"High lift: steep arc to the rear tramlines. Flat lift: lower trajectory to rush.",
+"Turn and recover to base immediately — never admire it."
+],
+"cues": [
+"Under it early",
+"High for time, flat to rush",
+"Recover before it lands"
+],
+"mistakes": [
+"Short lifts that sit mid-court",
+"Lifting from the net when a net shot was on",
+"Standing and watching after the lift"
+],
+"vid": "XlODCgDRqK0",
+"vt": "All 60 Shots In Badminton (lifts covered)",
+"ch": "Badminton Insight",
+"drill": "drill_depth"
+},
+{
+"id": "drive",
+"name": "Drive",
+"group": "Mid-court",
+"doubles": "Keep the rally flat and fast. Take it early in front of the body to jam them.",
+"steps": [
+"Split step; take the shuttle in front of the body, not beside the hip.",
+"Compact punch with forearm rotation — short backswing.",
+"Keep it flat and low over the net.",
+"Stay on the balls of the feet for the next drive or block."
+],
+"cues": [
+"Hit it before it crosses your body",
+"Short punch, not a swing",
+"Stay ready for the next one"
+],
+"mistakes": [
+"Late contact that floats up",
+"Big backswing that costs time",
+"Driving cross when straight was safer"
+],
+"vid": "VICxkR6BijI",
+"vt": "How To Perfect Your Backhand Drive",
+"ch": "Badminton Insight",
+"drill": "drill_early"
+},
+{
+"id": "push",
+"name": "Push",
+"group": "Mid-court",
+"doubles": "Soft mid-court pressure into the body or mid-court gap — between a net shot and a drive.",
+"steps": [
+"Meet the shuttle early with a firm but soft hand.",
+"Guide it into the body or the gap between opponents.",
+"Little follow-through; racket returns to ready.",
+"Use off the serve receive and off soft mid-court returns."
+],
+"cues": [
+"Early contact",
+"Into the body or the gap",
+"Soft hand, firm face"
+],
+"mistakes": [
+"Pushing too hard (becomes a drive they attack)",
+"Pushing high to the rear (smashable)",
+"Same target every time"
+],
+"vid": "Z6mUYSPzDa4",
+"vt": "How To Dominate The Mid-Court In Doubles",
+"ch": "Badminton Insight",
+"drill": "drill_early"
+},
+{
+"id": "block",
+"name": "Block (smash defence)",
+"group": "Defence",
+"doubles": "Your strength. Soft hands take pace off the smash and drop it tight to the net.",
+"steps": [
+"Wide base, racket out in front, soft grip.",
+"Don't swing — meet the smash and cushion.",
+"Angle the face so the shuttle dies at the net.",
+"Recover toward the net or mid as the quality of the block allows."
+],
+"cues": [
+"Soft hands, racket in front",
+"Cushion, don't swing",
+"Aim tight to the net"
+],
+"mistakes": [
+"Hard blocking that sits up mid-court",
+"Racket too late / beside the body",
+"Lifting when a block was on"
+],
+"vid": "agi7ZSdSqPA",
+"vt": "How To Defend In Mixed Doubles",
+"ch": "Badminton Insight",
+"drill": "drill_early"
+},
+{
+"id": "fh_clear",
+"name": "Forehand clear",
+"group": "Overhead",
+"doubles": "Buy time and push them deep. Must land in the rear tramlines — mid-court clears get smashed.",
+"steps": [
+"Turn sideways early; get behind the shuttle.",
+"Belt buckle to the net first — hips lead.",
+"Contact high and slightly in front; hit up and through.",
+"Scissor or chassé recover to base."
+],
+"cues": [
+"Belt buckle to the net",
+"Behind it, then up and through",
+"Tramlines or it's a miss"
+],
+"mistakes": [
+"Late flat contact → mid-court",
+"Arm-only swing (shoulder fries)",
+"Falling back on landing"
+],
+"vid": "if-dh7Pqd8c",
+"vt": "Overhead Badminton Shots: Perfect Your Clear, Smash, and Drop",
+"ch": "Badminton Famly",
+"drill": "drill_depth"
+},
+{
+"id": "bh_clear",
+"name": "Backhand clear",
+"group": "Overhead",
+"doubles": "Escape from the deep backhand corner. Prefer round-the-head when you have time; use true backhand when you don't.",
+"steps": [
+"Turn early, elbow up, racket head above the hand.",
+"Get under and slightly behind; thumb drive through.",
+"Hit high to the rear tramlines.",
+"Recover hard — this often leaves you out of position."
+],
+"cues": [
+"Elbow up early",
+"Thumb drive, not a slap",
+"High to the tramlines"
+],
+"mistakes": [
+"Contact too low / in front → net or mid-court",
+"Round-the-head avoided when it was on",
+"No recovery after contact"
+],
+"vid": "F7Clf4SnTlI",
+"vt": "How To Play A Backhand - Backhand Drop, Clear and Smash!",
+"ch": "Badminton Insight",
+"drill": "drill_rear"
+},
+{
+"id": "drop",
+"name": "Drop (slow / fast / slice)",
+"group": "Overhead",
+"doubles": "Bring them in after a clear. Same preparation as smash/clear so they can't read it.",
+"steps": [
+"Same overhead set-up as a clear or smash.",
+"Slow drop: soften at contact, place just over the tape.",
+"Fast drop: more pace, lands nearer the service line.",
+"Slice: brush the side of the feathers to kill pace and add drift.",
+"Recover in — expect a lift or net reply."
+],
+"cues": [
+"Same prep as smash/clear",
+"Place, don't slap",
+"Follow the drop in"
+],
+"mistakes": [
+"Different preparation that tips the drop",
+"Dropping too high / long",
+"Standing back after the drop"
+],
+"vid": "Q4RFqECaJFE",
+"vt": "4 Types of Dropshots from Beginner to Pro",
+"ch": "Tobias Wadenka",
+"drill": "drill_depth"
+},
+{
+"id": "smash",
+"name": "Smash",
+"group": "Attack",
+"doubles": "Primary attacking weapon. Steep and placed beats wild pace.",
+"steps": [
+"Turn, get behind it, belt buckle to the net.",
+"Jump if you can; contact high and in front.",
+"Wrist/forearm snap; aim at body or mid-court gap.",
+"Scissor kick: land on the left foot (RH), weight going forward — not two-footed falling back.",
+"Follow in toward the net."
+],
+"cues": [
+"Belt buckle to the net",
+"Scissor, land on left, go forward",
+"Place it — body or gap"
+],
+"mistakes": [
+"Two-footed landing falling backwards",
+"Arm-only smash",
+"Smashes into the tramline body that they block cross"
+],
+"vid": "anFnw6ZvIfk",
+"vt": "3 Things Pro Badminton Players Do On Their Smash",
+"ch": "Badminton Insight",
+"drill": "drill_hips"
+},
+{
+"id": "jump_smash",
+"name": "Jump smash",
+"group": "Attack",
+"doubles": "Higher contact = steeper angle. Use when the lift is high enough that you have time.",
+"steps": [
+"Read the high lift early; load the jump.",
+"Full scissor: plant, jump, smash at the top.",
+"Land on the left foot (RH) moving forward.",
+"Be ready to kill the next weak return at the net."
+],
+"cues": [
+"Jump only when you have time",
+"Contact at the top",
+"Scissor land, go forward"
+],
+"mistakes": [
+"Jumping on low lifts (late contact)",
+"Two-footed stick on landing",
+"No follow-in after the smash"
+],
+"vid": "Seony5Owsb8",
+"vt": "Learn The Jump Smash! Step-By-Step Badminton Tutorial",
+"ch": "Badminton Insight",
+"drill": "drill_lunge"
+},
+{
+"id": "rth",
+"name": "Round-the-head smash / clear",
+"group": "Attack",
+"doubles": "Cover the deep backhand corner with a forehand. Essential in doubles rear-court play.",
+"steps": [
+"For fast flat lifts: Malaysian left-right-left chassé into a one-leg jump.",
+"For high clears: cross step behind, then full scissor-kick jump.",
+"Belt buckle turns toward the net; hit smash or clear with the same prep.",
+"Land on the left foot and recover to base."
+],
+"cues": [
+"Malaysian L-R-L for fast flats",
+"Cross + scissor for high clears",
+"Hips first, then the arm"
+],
+"mistakes": [
+"Running backwards instead of turning",
+"Using Malaysian on high clears (rushed)",
+"Falling back on landing"
+],
+"vid": "hycncSzcvHc",
+"vt": "Badminton around the head SMASH tutorial (w. scissors jump)",
+"ch": "Basicfeather",
+"drill": "drill_rear"
+},
+{
+"id": "bh_rear",
+"name": "Backhand rear-corner shot",
+"group": "Overhead",
+"doubles": "Last resort when you can't get round the head. Clear high or soft drop — avoid a flat mid-court gift.",
+"steps": [
+"Turn early; don't run facing the back.",
+"Elbow high, compact thumb action.",
+"Prefer a high clear to the tramlines or a soft drop.",
+"Only drive/smash if the shuttle is high enough.",
+"Sprint recover — partner covers the net."
+],
+"cues": [
+"Turn early, elbow high",
+"High clear or soft drop",
+"Recover hard"
+],
+"mistakes": [
+"Flat mid-court backhand",
+"Trying a power smash from too low",
+"No call so partner also goes"
+],
+"vid": "F7Clf4SnTlI",
+"vt": "How To Play A Backhand - Backhand Drop, Clear and Smash!",
+"ch": "Badminton Insight",
+"drill": "drill_rear"
+}
+]
