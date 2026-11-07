@@ -96,6 +96,13 @@ table.wk{width:100%;border-collapse:collapse;font-size:14px}table.wk td{padding:
 .shot-card .cues{margin:0;padding:0;list-style:none}.shot-card .cues li{padding:6px 0;border-top:1px solid #ffffff10}
 .shot-card .cues li:first-child{border-top:0}
 .shot-thumb{width:100%;max-width:280px;height:auto;aspect-ratio:16/9;border-radius:10px;object-fit:cover;background:#000;margin:8px 0;display:block}
+.library-places{margin-bottom:12px}
+.optional-strength,.library-context{display:block;color:var(--mut);font-size:12px;margin:10px 4px 2px}
+.priority{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;margin:12px 0}
+.priority h3{margin:0;font-size:20px}.priority p{color:var(--mut);font-size:14px;margin:6px 0}
+.priority-times{padding-left:20px;color:var(--mut);font-size:14px}
+.priority-stats{color:var(--acc2);font-size:14px;align-self:center}
+.priorities-banner{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 12px;font-size:13px;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -135,7 +142,7 @@ G.iso=[G.rehab[0]];
 G.sat=[G.warmup[0],G.warmup[1],G.warmup[2],G.plyo[0],G.plyo[4]].concat(G.sat_groin);
 var SECTIONS=[["warmup","Warm-up"],["activate","Glute & core activation"],["tech_shadow","Slow → fast shadow (6 corners)"],["tech_move","Controlled movement"],["tech_swing","Short swing"],["cond","Conditioning"],["groin","Groin & knee stability"],["rehab","Calf & Achilles rehab"],["recovery","Recovery: swim, bike, sauna"],["home","Home routine"]];
 var CUES=[["Low ceiling","Stay low and level between steps: glide with chassés, push sideways not up, only jump when the shot needs it. If your head bobs, you are bouncing."],["Short swing","Racket up in front of your chest, power from fingers and forearm, hit in front, stop after contact and recoil to ready."],["Glute timing","Fire the glutes at the push-off, the lunge landing and the push back to base. Otherwise a light 20–30% brace, not clenched."],["Chest proud in the lunge","Hinge from the hip crease with a flat back, never fold at the waist. Knee over ankle, not past the toes. Cue: bum back, chest up."],["Scissor, land, go","Switch legs in the air on every smash, land on the left foot and move forward to the net."],["Racket up after every shot","Racket head back in front of your chest before your opponent hits."],["Belt buckle to the net","Hips turn first on clears and smashes; the arm follows. Late flat contact is what lands mid court."],["Split step, then turn","Small hop as they hit, then turn sideways before you travel — never run backwards to the rear court."],["Spread the floor", "For knees caving on the split step: feet slightly wider than shoulders, toes 10–15° out, knees over the second toe, weight on the balls and outside edges. Drop shallower at first. Knee pain, or one side much worse (check ankle stiffness given the Achilles): see a physio."], ["Split step down, not up", "Small, low drop as they hit: no hop, no head bob. The big fix from your clips."], ["Scissor kick landing", "Right-hander: take off from the right, land left foot first, don't fall back, then push back off the right towards the net."], ["Backhand drive: flat to vertical", "Face starts flat, snap it vertical with forearm rotation plus a thumb press. Low elbow, short backswing, hit in front, stop the racket."], ["Upright posture", "Eyes up, free arm thrown back, hinge at the hips, front knee about 90°, racket out early. Slow shadow rounds: balance a towel or cap on your head."],["Morning-after Achilles check","Stiff or sore the morning after jumping means two-footed jumps only for a session or two."]];
-var MATCH=[["Split step every hit","Small hop as the opponent hits, land on the balls of the feet."],["Racket up","Racket head above your hand between shots, never below the waist."],["Scissor, land, go","After the smash land on the left foot and follow in to the net."],["Don't lift and hang at the net","If you lift, get back to base and defend side-by-side."],["Pace yourself","Against weaker players, play patient, set up the kill; use drives and net shots instead of lifting."]];
+var MATCH=[["Split step every hit","Small, low drop (down, not up) as the opponent hits, land on the balls of the feet."],["Racket up","Racket head above your hand between shots, never below the waist."],["Scissor, land, go","After the smash land on the left foot and follow in to the net."],["Don't lift and hang at the net","If you lift, get back to base and defend side-by-side."],["Pace yourself","Against weaker players, play patient, set up the kill; use drives and net shots instead of lifting."]];
 var DRILLS=[
  {id:"drill_move",title:"Controlled movement",short:"Controlled movement",cue:"Low and level, glide don't hop",note:"Eyes up, free arm back in the lunge, bum back chest up. Small split step, 1–2 push-backs to base. Rear corners: chassé then scissor, land left foot first. Shadow slow until it's right, then fast until it's automatic.",achilles:true},
  {id:"drill_swing",title:"Short swing",short:"Short swing",cue:"Racket in front, fingers and forearm, stop after contact",note:"Hit in front of your body. Thumb press snaps the face flat to vertical on the backhand drive. No follow-through across the chest.",achilles:false},
@@ -150,18 +157,59 @@ var DRILLS=[
  {id:"drill_fit",title:"Fitness / getting gassed",short:"Fitness",cue:"Easy base plus badminton intervals",note:"One easy base session and one hard interval session per week. Rest 30–60s and drink between drill sets.",achilles:false}
 ];
 
+// Library memberships are tags: exercise content is defined only in G.
+// Always render refs with their original group/index, including day-block aliases.
+var LIBRARY = [
+ {id:"court",title:"Court",groups:[
+  {"title":"Net kills","refs":[["drill_net",0],["drill_net",1],["drill_net",2],["drill_net",3],["drill_net",4]],"id":"drill_net"},
+  {"title":"Serve receive","refs":[["drill_receive",0],["drill_receive",1]],"id":"drill_receive"},
+  {"title":"Taking the shuttle early","refs":[["drill_early",0],["drill_early",1],["drill_early",2],["drill_early",3],["drill_early",4]],"id":"drill_early"},
+  {"title":"Front to rear court (both corners)","refs":[["drill_rear",0],["drill_rear",1],["drill_rear",2],["drill_rear",3],["drill_rear",4],["drill_rear",5],["drill_rear",6]],"id":"drill_rear"},
+  {"title":"Clear depth / stop mid-court hits","refs":[["drill_depth",0],["drill_depth",1],["drill_depth",2]],"id":"drill_depth"},
+  {"title":"Lunges and landings","refs":[["drill_lunge",0],["drill_lunge",1],["drill_lunge",2],["drill_lunge",3],["home",0],["home",1],["home",2]],"id":"drill_lunge"},
+  {"title":"Hips and power","refs":[["drill_hips",0],["drill_hips",1],["drill_hips",2],["drill_hips",3],["activate",0],["activate",1],["activate",2]],"id":"drill_hips"},
+  {"title":"Fitness / getting gassed","refs":[["drill_fit",0],["drill_fit",1],["drill_fit",2],["drill_fit",3],["cond",0]],"id":"drill_fit"},
+  {"title":"Controlled movement","refs":[["drill_move",0],["drill_move",1],["drill_move",2],["drill_move",3],["drill_move",4],["drill_move",5],["drill_move",6],["drill_move",7],["tech_shadow",0],["tech_shadow",1],["tech_shadow",2],["tech_move",0],["tech_move",1],["tech_move",2],["tech_move",3],["tech_move",4],["tech_move",5]],"id":"drill_move"},
+  {"title":"Short swing","refs":[["drill_swing",0],["drill_swing",1],["drill_swing",2],["drill_swing",3],["drill_swing",4],["drill_swing",5],["drill_swing",6],["tech_swing",0],["tech_swing",1],["tech_swing",2],["tech_swing",3]],"id":"drill_swing"},
+  {"title":"Knees & groin stability","refs":[["drill_knees",0],["drill_knees",1],["drill_knees",2],["drill_knees",3],["drill_knees",4],["groin",0],["groin",1],["groin",2],["groin",3],["sat_groin",0],["sat_groin",1],["sat_groin",2],["sat_groin",3]],"id":"drill_knees"},
+ ]},
+ {id:"gym",title:"Gym",groups:[
+  {"title":"Hips & glutes","refs":[["activate",0],["activate",1],["activate",2],["drill_hips",0],["drill_hips",1],["strength",0],["strength",1],["strength",2],["strength",3],["tech_move",3],["drill_move",4],["drill_lunge",0],["drill_lunge",1],["drill_lunge",2],["home",0],["home",1],["home",2],["drill_knees",2],["warmup",2]]},
+  {"title":"Groin & adductors","refs":[["groin",0],["groin",1],["groin",2],["groin",3],["sat_groin",0],["sat_groin",1],["sat_groin",2],["home",6],["home",7],["home",8]]},
+  {"title":"Knees & split-step stability","refs":[["drill_knees",0],["drill_knees",1],["drill_knees",2],["drill_knees",3],["drill_knees",4],["sat_groin",3],["rehab",4],["tech_move",0],["tech_move",1],["tech_move",2],["tech_move",3],["tech_move",4],["tech_move",5],["drill_move",0],["drill_move",1],["drill_move",2],["drill_move",3],["drill_move",4],["drill_move",5],["drill_move",6],["tech_shadow",0],["tech_shadow",1],["tech_shadow",2],["fin",2]]},
+  {"title":"Calves & Achilles","refs":[["warmup",0],["warmup",1],["rehab",0],["rehab",1],["rehab",2],["rehab",3],["strength",4],["strength",5],["plyo",0],["plyo",1],["plyo",2],["plyo",3],["plyo",4],["fin",0],["fin",1],["fin",3],["iso",0]]},
+  {"title":"Core & posture","refs":[["core",0],["core",1],["core",2],["drill_depth",2],["drill_hips",2],["cond",0]]},
+  {"title":"Shoulder & swing","refs":[["tech_swing",0],["tech_swing",1],["tech_swing",2],["tech_swing",3],["drill_swing",0],["drill_swing",1],["drill_swing",2],["drill_swing",3],["strength",6],["strength",7],["home",4],["home",5],["drill_net",0],["drill_net",3],["drill_net",4],["drill_depth",1],["drill_hips",3]]},
+ ]},
+ {id:"home",title:"Home",groups:[
+  {"title":"Shadow footwork","refs":[["tech_shadow",0],["tech_shadow",1],["tech_shadow",2],["home",0],["home",1],["home",2],["home",3],["home",4],["tech_move",0],["tech_move",1],["tech_move",2],["tech_move",3],["drill_move",0],["drill_move",1],["drill_move",2],["drill_move",3],["drill_move",4],["drill_rear",0],["drill_rear",4],["drill_rear",5],["drill_lunge",0],["drill_lunge",1],["drill_lunge",2],["drill_lunge",3],["drill_fit",1],["tech_swing",0],["tech_swing",1],["tech_swing",2],["drill_swing",0],["drill_swing",1],["drill_swing",2],["drill_depth",1],["drill_hips",3],["drill_receive",1]]},
+  {"title":"Band work","refs":[["activate",1],["drill_knees",0],["drill_knees",1],["drill_knees",2],["sat_groin",3],["strength",7],["core",0],["home",4]]},
+  {"title":"Mobility","refs":[["warmup",1],["warmup",2],["home",6],["home",7],["sat_groin",0],["sat_groin",1]]},
+ ]},
+ {id:"recovery",title:"Recovery",groups:[
+  {"title":"Swim, bike, sauna","refs":[["recovery",0],["recovery",1],["recovery",2],["drill_fit",0],["drill_fit",2],["drill_fit",3]]},
+  {"title":"Stretches & foam rolling","refs":[["home",6],["home",7],["home",8],["warmup",1],["warmup",2]]},
+  {"title":"Adductor recovery","refs":[["home",6],["home",7],["home",8]]},
+ ]},
+];
+var OPTIONAL_STRENGTH=["strength","core","plyo"];
+
 function londonDate(){
  try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"}).formatToParts(new Date());var o={};p.forEach(function(x){o[x.type]=x.value});return {key:o.year+"-"+o.month+"-"+o.day,wd:o.weekday.slice(0,3)};}
  catch(e){var d=new Date();return {key:d.toISOString().slice(0,10),wd:DAYS[d.getDay()]};}
 }
 var TODAY=londonDate();
+var PRIORITIES=[{"id": "controlled_movement", "title": "Controlled movement", "why": "Be less springy: stop wasting energy jumping between shots.", "cue": "Split step down, not up — glide, low ceiling", "time_blocks": ["Daily at home: 10–15 min", "Mon/Thu: first 15 min of the technique session", "Tue/Fri: 15 min in the court warm-up"], "drills": [["tech_shadow", 0], ["tech_move", 0], ["tech_move", 1], ["tech_move", 2]]}, {"id": "short_swing", "title": "Short swing", "why": "Keep the swing compact for earlier contact and a quicker return to ready.", "cue": "Racket in front, fingers and forearm, stop after contact", "time_blocks": ["Daily at home: 10–15 min", "Mon/Thu: first 15 min of the technique session", "Tue/Fri: 15 min in the court warm-up"], "drills": [["tech_swing", 0], ["tech_swing", 1], ["tech_swing", 2], ["tech_swing", 3]]}];
 function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 var SK="jtw:"+TODAY.key;
 var state=load(SK,{});
+var prioritiesLog=load("trackit_priorities_log",{});
 var current=load("jtw:view",null);
 if(!current||current.date!==TODAY.key) current={date:TODAY.key,v:TODAY.wd};
 var drillFocus=load("jtw:drillfocus:"+TODAY.key,[]);
+var libraryPlace=load("jtw:libraryplace","court");
+if(!LIBRARY.some(function(p){return p.id===libraryPlace}))libraryPlace="court";
 var drillMode=load("jtw:drillmode","all");
 var drillOpen=load("jtw:drillopen",{});
 var shotOpen=load("jtw:shotopen",{});
@@ -172,6 +220,7 @@ function restFor(e){return /plyo|Pogo|jump|hop|bound/i.test(e.name)?90:60}
 
 function tabs(){
  var h="";DAYS.slice(1).concat(["Sun"]).forEach(function(d){h+='<button class="tab'+(current.v===d?" on":"")+'" data-v="'+d+'">'+d+(d===TODAY.wd?'<span class="today">TODAY</span>':"")+"</button>"});
+ h+='<button class="tab'+(current.v==="priorities"?" on":"")+'" data-v="priorities">Priorities</button>';
  h+='<button class="tab'+(current.v==="all"?" on":"")+'" data-v="all">All</button>';
  h+='<button class="tab'+(current.v==="drills"?" on":"")+'" data-v="drills">Drills</button>';
  h+='<button class="tab'+(current.v==="shots"?" on":"")+'" data-v="shots">Shots</button>';
@@ -183,6 +232,25 @@ function card(e,blk,i){
  var n=nSets(e.sets),id=blk+"-"+i+"-"+e.vid,c="",done=0,arr=state[id]||[];
  for(var k=0;k<n;k++){var on=!!arr[k];if(on)done++;c+='<label><input type="checkbox" data-id="'+id+'" data-k="'+k+'" data-n="'+n+'"'+(on?" checked":"")+' aria-label="'+esc(e.name)+' set '+(k+1)+'"><span>'+(n>1?k+1:"✓")+"</span></label>"}
  return '<div class="card'+(done===n?" done":"")+'" data-card="'+id+'"><img class="thumb" alt="Demo: '+esc(e.vt)+'" src="'+e.img+'"><div><h4>'+esc(e.name)+'</h4><div class="sets">'+esc(e.sets)+'</div><div class="cue">'+esc(e.cue)+'</div><div class="actions">'+(e.url==="NONE"?"":'<a class="watch" target="_blank" rel="noopener" href="'+(e.url||("https://www.youtube.com/watch?v="+e.vid))+'">▶ Watch demo</a>')+'<button class="btn sm" data-rest="'+restFor(e)+'">Rest '+restFor(e)+'s</button></div><div class="chk">'+c+'</div><div class="src">'+esc(e.vt)+" · "+esc(e.ch)+"</div></div></div>";
+}
+// Calendar arithmetic in UTC avoids daylight-saving gaps in London dates.
+function previousDate(key){var d=new Date(key+"T12:00:00Z");d.setUTCDate(d.getUTCDate()-1);return d.toISOString().slice(0,10)}
+function priorityStats(id){
+ var dates=prioritiesLog[id]||[],done=dates.indexOf(TODAY.key)>=0,day=done?TODAY.key:previousDate(TODAY.key),streak=0;
+ while(dates.indexOf(day)>=0){streak++;day=previousDate(day)}
+ return {done:done,streak:streak,total:dates.length};
+}
+function prioritiesHtml(){
+ var h='<section class="hero"><h2>Priorities</h2><p>Two cues to practise while fresh. Drill ticks are shared with your day plans and library. Mark each priority done once a day.</p></section>';
+ PRIORITIES.forEach(function(p,i){
+  var stats=priorityStats(p.id);
+  h+='<section class="priority"><h3>'+esc((i+1)+". "+p.title)+'</h3><p><b>Why:</b> '+esc(p.why)+'</p><div class="cue-row"><b>Key cue</b>'+esc(p.cue)+'</div><ul class="priority-times">';
+  p.time_blocks.forEach(function(time){h+='<li>'+esc(time)+'</li>'});
+  h+='</ul>';
+  p.drills.forEach(function(ref){h+=dcard(G[ref[0]][ref[1]],ref[0],ref[1],true)});
+  h+='<div class="actions"><button class="btn'+(stats.done?' pri':'')+'" type="button" data-priority-done="'+esc(p.id)+'" aria-pressed="'+stats.done+'">'+(stats.done?'✓ Done today · Undo':'Done today')+'</button><span class="priority-stats" role="status">Streak: '+stats.streak+' day'+(stats.streak===1?'':'s')+' · Total: '+stats.total+'</span></div></section>';
+ });
+ return h;
 }
 function ruleBox(){
  var hist=load("jtw:checkins",[]),today=hist.filter(function(x){return x.d===TODAY.key})[0];
@@ -198,14 +266,23 @@ function progress(blocks){
 }
 function modeOf(e){return e.mode||(/Partner|partner|both of you|Swap|swap|They |they /.test(e.cue)?"partner":"solo")}
 function selectedDrills(){
- if(!drillFocus.length) return DRILLS.slice();
- return DRILLS.filter(function(d){return drillFocus.indexOf(d.id)>=0});
+ var place=LIBRARY.filter(function(p){return p.id===libraryPlace})[0];
+ return place.groups.filter(function(g){return libraryPlace!=="court"||!drillFocus.length||drillFocus.indexOf(g.id)>=0});
 }
 function filteredExercises(d){
- return G[d.id].map(function(e,i){return {e:e,i:i}}).filter(function(x){
-  if(drillMode==="all") return true;
-  return modeOf(x.e)===drillMode;
+ return d.refs.map(function(ref){return {e:G[ref[0]][ref[1]],blk:ref[0],i:ref[1]}}).filter(function(x){
+  return libraryPlace!=="court"||drillMode==="all"||modeOf(x.e)===drillMode;
  });
+}
+function libraryProgress(){
+ var seen={},t=0,done=0;
+ selectedDrills().forEach(function(g){filteredExercises(g).forEach(function(x){
+  var id=x.blk+"-"+x.i+"-"+x.e.vid;
+  if(seen[id])return;seen[id]=true;
+  var n=nSets(x.e.sets),arr=state[id]||[];t+=n;
+  for(var k=0;k<n;k++)if(arr[k])done++;
+ })});
+ return [done,t];
 }
 function dcard(e,blk,i,open){
  var n=nSets(e.sets),id=blk+"-"+i+"-"+e.vid,c="",done=0,arr=state[id]||[],mode=modeOf(e);
@@ -217,47 +294,40 @@ function dcard(e,blk,i,open){
  return h;
 }
 function drillsHtml(){
- var sel=selectedDrills();
- var blocks=sel.map(function(d){return [d.title,d.id]});
-
- var t=0,dcount=0;
- sel.forEach(function(dr){
-  filteredExercises(dr).forEach(function(x){
-   var n=nSets(x.e.sets),arr=state[dr.id+"-"+x.i+"-"+x.e.vid]||[];
-   t+=n;for(var k=0;k<n;k++)if(arr[k])dcount++;
+ var sel=selectedDrills(),p=libraryProgress(),pc=p[1]?Math.round(p[0]/p[1]*100):0;
+ var place=LIBRARY.filter(function(p){return p.id===libraryPlace})[0];
+ var h='<nav class="tabs library-places" aria-label="Drill location">';
+ LIBRARY.forEach(function(p){h+='<button class="tab'+(libraryPlace===p.id?' on':'')+'" type="button" data-place="'+p.id+'" aria-pressed="'+(libraryPlace===p.id)+'">'+esc(p.title)+'</button>'});
+ h+='</nav><section class="hero"><h2>'+esc(place.title)+' library</h2><p>'+(libraryPlace==='court'?'Pick up to 2 focuses. Filter solo or partner.':'Browse by group. Ticks use the same cards as your day plans.')+' Cards stay compact until you open them.</p>';
+ if(p[1])h+='<div class="bar"><i id="pbar" style="width:'+pc+'%"></i></div><div class="prow"><span id="ptxt">'+p[0]+' / '+p[1]+' sets · '+pc+'%</span><button class="btn sm" id="resetday">Reset today</button></div>';
+ h+='</section>';
+ if(libraryPlace==='court'){
+  h+='<div class="filter-row"><div class="lab">Focus (max 2)</div></div><div class="tiles">';
+  DRILLS.forEach(function(d){
+   h+='<button class="tile'+(drillFocus.indexOf(d.id)>=0?' on':'')+'" type="button" data-focus="'+d.id+'">'+esc(d.short)+'<small>'+esc(d.cue)+'</small></button>';
   });
- });
- var pc=t?Math.round(dcount/t*100):0;
- var h='<section class="hero"><h2>Drills by focus</h2><p>Pick up to 2 focuses. Filter solo or partner. Cards stay compact until you open them.</p>';
- if(t)h+='<div class="bar"><i id="pbar" style="width:'+pc+'%"></i></div><div class="prow"><span id="ptxt">'+dcount+" / "+t+' sets · '+pc+'%</span><button class="btn sm" id="resetday">Reset today</button></div>';
- h+="</section>";
- h+='<div class="filter-row"><div class="lab">Focus (max 2)</div></div><div class="tiles">';
- DRILLS.forEach(function(d){
-  var on=drillFocus.indexOf(d.id)>=0;
-  h+='<button class="tile'+(on?" on":"")+'" type="button" data-focus="'+d.id+'">'+esc(d.short)+'<small>'+esc(d.cue)+'</small></button>';
- });
- h+='</div>';
- h+='<div class="filter-row"><div class="lab">Mode</div></div><div class="chips">';
- [["all","All"],["solo","Solo"],["partner","Partner"]].forEach(function(m){
-  h+='<button class="chip'+(drillMode===m[0]?" on":"")+'" type="button" data-mode="'+m[0]+'">'+m[1]+'</button>';
- });
- h+='</div>';
- h+='<div class="note"><b>How to use:</b> 1–2 focuses while fresh. Film a match every few weeks and drop a drill once the fix shows up in games.</div>';
- if(sel.some(function(d){return d.achilles})) h+=ruleBox();
- sel.forEach(function(d){
-  h+='<h3 class="sec">'+esc(d.title)+"</h3>";
-  h+='<div class="cue-row"><b>Cue: '+esc(d.cue)+"</b>"+esc(d.note)+"</div>";
-  if(d.achilles){
-   h+='<div class="fold" data-fold="'+d.id+'"><button type="button" data-toggle-fold="'+d.id+'"><span>Achilles note</span><span>▾</span></button><div class="fold-body">Malaysian step and scissor jumps load the calf. Stiff the morning after? Two-footed only for a session or two. Your Wed rehab still applies.</div></div>';
+  h+='</div><div class="filter-row"><div class="lab">Mode</div></div><div class="chips">';
+  [["all","All"],["solo","Solo"],["partner","Partner"]].forEach(function(m){h+='<button class="chip'+(drillMode===m[0]?' on':'')+'" type="button" data-mode="'+m[0]+'">'+m[1]+'</button>'});
+  h+='</div><div class="note"><b>How to use:</b> 1–2 focuses while fresh. Film a match every few weeks and drop a drill once the fix shows up in games.</div>';
+  if(sel.some(function(g){return DRILLS.some(function(d){return d.id===g.id&&d.achilles})}))h+=ruleBox();
+ }
+ sel.forEach(function(g){
+  h+='<h3 class="sec">'+esc(g.title)+'</h3>';
+  var d=DRILLS.filter(function(d){return d.id===g.id})[0];
+  if(d){
+   h+='<div class="cue-row"><b>Cue: '+esc(d.cue)+'</b>'+esc(d.note)+'</div>';
+   if(d.achilles)h+='<div class="fold" data-fold="'+d.id+'"><button type="button" data-toggle-fold="'+d.id+'"><span>Achilles note</span><span>▾</span></button><div class="fold-body">Malaysian step and scissor jumps load the calf. Stiff the morning after? Two-footed only for a session or two. Your Wed rehab still applies.</div></div>';
   }
-  var list=filteredExercises(d);
-  if(!list.length) h+='<div class="note">No '+esc(drillMode)+' drills in this focus. Switch mode or pick another focus.</div>';
+  var list=filteredExercises(g);
+  if(!list.length)h+='<div class="note">No '+esc(drillMode)+' drills in this focus. Switch mode or pick another focus.</div>';
   list.forEach(function(x){
-   var id=d.id+"-"+x.i+"-"+x.e.vid;
-   h+=dcard(x.e,d.id,x.i,!!drillOpen[id]);
+   var id=x.blk+'-'+x.i+'-'+x.e.vid;
+   if(OPTIONAL_STRENGTH.indexOf(x.blk)>=0)h+='<small class="optional-strength">Optional strength library – technique comes first</small>';
+   // Derived day blocks retain separate saved ticks; identify their entries clearly.
+   if(['fin','iso'].indexOf(x.blk)>=0)h+='<small class="library-context">'+(x.blk==='fin'?'Mon/Thu rehab finisher':'Friday isometric holds')+'</small>';
+   h+=dcard(x.e,x.blk,x.i,!!drillOpen[id]);
   });
  });
- if(!sel.length) h+='<div class="note">Select a focus tile above to see drills.</div>';
  return h;
 }
 
@@ -302,7 +372,7 @@ function shotsHtml(){
 }
 function drillsCtaHtml(V){
  var f=(V&&V.drillsFocus)||[];
- if(!f.length) return '<div class="cta"><p><b>Drills for today</b> — pick 1–2 focuses while fresh, then take them onto court.</p><button class="btn pri" data-v="drills">Open Drills</button></div>';
+ if(!f.length) return '<div class="cta"><p><b>Drills for today</b> — pick 1–2 focuses while fresh, then take them onto court.</p><button class="btn pri" data-place-jump="court" data-v="drills">Open Drills</button></div>';
  var names=f.map(function(id){var d=DRILLS.filter(function(x){return x.id===id})[0];return d?d.short:id}).join(" + ");
  return '<div class="cta"><p><b>Drills for today: '+esc(names)+'</b> — the focuses that match this session. Solo cards work at home; partner cards on court.</p><button class="btn pri" data-focus-jump="'+f.join(",")+'">Open Drills</button></div>';
 }
@@ -313,6 +383,7 @@ function render(){
  document.getElementById("datesub").textContent="Today: "+TODAY.wd+" "+TODAY.key+" · "+(VIEWS[TODAY.wd]?VIEWS[TODAY.wd].title:"");
  if(VIEWS[v]){
   var V=VIEWS[v],p=progress(V.blocks),pc=p[1]?Math.round(p[0]/p[1]*100):0;
+  if(["Mon","Tue","Thu","Fri"].indexOf(v)>=0)h+='<div class="priorities-banner"><button class="btn sm" data-v="priorities">Priorities →</button><span>Controlled movement · Short swing</span></div>';
   h+='<section class="hero"><h2>'+v+": "+esc(V.title)+(v===TODAY.wd?" <small style=\"color:var(--acc);font-size:13px\">TODAY</small>":"")+'</h2><p>'+esc(V.desc)+'</p>';
   if(p[1])h+='<div class="bar"><i id="pbar" style="width:'+pc+'%"></i></div><div class="prow"><span id="ptxt">'+p[0]+" / "+p[1]+" sets · "+pc+'%</span><button class="btn sm" id="resetday">Reset today</button></div>';
   h+="</section>";
@@ -326,6 +397,8 @@ function render(){
   h+='<section class="hero"><h2>All sections</h2><p>Every exercise in the plan. Ticks here are saved for today too.</p></section>';
   SECTIONS.forEach(function(s){h+='<h3 class="sec">'+esc(s[1])+"</h3>";G[s[0]].forEach(function(e,i){h+=card(e,s[0],i)})});
   h+=ruleBox()+cuesHtml();
+ }else if(v==="priorities"){
+  h+=prioritiesHtml();
  }else if(v==="drills"){
   h+=drillsHtml();
  }else if(v==="shots"){
@@ -340,9 +413,7 @@ function render(){
 }
 function updProgress(){
  if(current.v==="drills"){
-  var sel=selectedDrills(),t=0,dcount=0;
-  sel.forEach(function(dr){filteredExercises(dr).forEach(function(x){var n=nSets(x.e.sets),arr=state[dr.id+"-"+x.i+"-"+x.e.vid]||[];t+=n;for(var k=0;k<n;k++)if(arr[k])dcount++})});
-  var pc=t?Math.round(dcount/t*100):0;
+  var p=libraryProgress(),dcount=p[0],t=p[1],pc=t?Math.round(dcount/t*100):0;
   var b=document.getElementById("pbar"),el=document.getElementById("ptxt");if(b)b.style.width=pc+"%";if(el)el.textContent=dcount+" / "+t+" sets · "+pc+"%"+(pc===100?" 🎉":"");
   return;
  }
@@ -352,13 +423,21 @@ function updProgress(){
  var b=document.getElementById("pbar"),t=document.getElementById("ptxt");if(b)b.style.width=pc+"%";if(t)t.textContent=p[0]+" / "+p[1]+" sets · "+pc+"%"+(pc===100?" 🎉":"");
 }
 document.addEventListener("click",function(ev){
- var t=ev.target.closest("[data-focus-jump],[data-v],[data-rest],[data-ci],#resetday,[data-focus],[data-mode],[data-toggle-drill],[data-toggle-fold],[data-toggle-shot],[data-shot-filter],[data-focus-jump]");
+ var t=ev.target.closest("[data-priority-done],[data-place],[data-focus-jump],[data-v],[data-rest],[data-ci],#resetday,[data-focus],[data-mode],[data-toggle-drill],[data-toggle-fold],[data-toggle-shot],[data-shot-filter],[data-focus-jump]");
  if(!t)return;
+ if(t.dataset.priorityDone){
+  var id=t.dataset.priorityDone,dates=prioritiesLog[id]||[];
+  if(dates.indexOf(TODAY.key)>=0)dates=dates.filter(function(day){return day!==TODAY.key});
+  else dates=dates.concat([TODAY.key]).sort();
+  prioritiesLog[id]=dates;save("trackit_priorities_log",prioritiesLog);render();return;
+ }
+ if(t.dataset.place){libraryPlace=t.dataset.place;save("jtw:libraryplace",libraryPlace);render();return}
  if(t.dataset.focusJump){
+  libraryPlace="court";save("jtw:libraryplace",libraryPlace);
   drillFocus=t.dataset.focusJump.split(",").slice(0,2);save("jtw:drillfocus:"+TODAY.key,drillFocus);
   current={date:TODAY.key,v:"drills"};save("jtw:view",current);render();window.scrollTo(0,0);return;
  }
- if(t.dataset.v){current={date:TODAY.key,v:t.dataset.v};save("jtw:view",current);render();window.scrollTo(0,0);return}
+ if(t.dataset.v){if(t.dataset.placeJump){libraryPlace="court";save("jtw:libraryplace",libraryPlace)}current={date:TODAY.key,v:t.dataset.v};save("jtw:view",current);render();window.scrollTo(0,0);return}
  if(t.dataset.rest){setRest(parseInt(t.dataset.rest,10),true);return}
  if(t.dataset.ci){var hist=load("jtw:checkins",[]).filter(function(x){return x.d!==TODAY.key});hist.push({d:TODAY.key,s:t.dataset.ci});save("jtw:checkins",hist.slice(-60));render();return}
  if(t.id==="resetday"){if(confirm("Clear all ticks for today?")){state={};save(SK,state);render()}return}
@@ -374,8 +453,7 @@ document.addEventListener("click",function(ev){
  if(t.dataset.mode){drillMode=t.dataset.mode;save("jtw:drillmode",drillMode);render();return}
  if(t.dataset.toggleDrill){
   var id=t.dataset.toggleDrill;drillOpen[id]=!drillOpen[id];save("jtw:drillopen",drillOpen);
-  var card=document.querySelector('[data-dopen="'+id+'"]');
-  if(card){card.classList.toggle("open",!!drillOpen[id]);t.setAttribute("aria-expanded",drillOpen[id]?"true":"false")}
+  document.querySelectorAll('[data-dopen="'+id+'"]').forEach(function(card){card.classList.toggle("open",!!drillOpen[id]);card.querySelector('[data-toggle-drill]').setAttribute("aria-expanded",drillOpen[id]?"true":"false")});
   return;
  }
  if(t.dataset.toggleFold){
@@ -395,7 +473,7 @@ document.addEventListener("change",function(ev){
  var c=ev.target;if(!c.dataset||!c.dataset.id)return;
  var id=c.dataset.id,n=+c.dataset.n,arr=state[id]||[];arr[+c.dataset.k]=c.checked;state[id]=arr;save(SK,state);
  var done=0;for(var k=0;k<n;k++)if(arr[k])done++;
- document.querySelectorAll('[data-card="'+id+'"]').forEach(function(el){el.classList.toggle("done",done===n)});
+ document.querySelectorAll('[data-card="'+id+'"]').forEach(function(el){el.classList.toggle("done",done===n);el.querySelectorAll("input[data-k]").forEach(function(input){input.checked=!!arr[+input.dataset.k]})});
  updProgress();
  if(c.checked&&done<n)setRest(restFor({name:id}),true);
 });
